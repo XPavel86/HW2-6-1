@@ -41,10 +41,6 @@ final class LoginViewController: UIViewController, UITextFieldDelegate {
         
         setupView()
         setupActionKeyboard()
-        
-        setColorTextField(textField: userNameField)
-        setColorTextField(textField: passwordField)
-        
     }
     
     // MARK: - Overrides Methods
