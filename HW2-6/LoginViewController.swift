@@ -50,7 +50,7 @@ final class LoginViewController: UIViewController, UITextFieldDelegate {
     // скрываем клавиатуру при тапе на экране
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
-        self.view.endEditing(true)
+        view.endEditing(true)
     }
     
     // передаем текст в welcomeView
