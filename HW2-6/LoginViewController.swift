@@ -27,7 +27,7 @@ final class LoginViewController: UIViewController, UITextFieldDelegate {
     // MARK: - Initializers
     override func viewDidLoad() {
         super.viewDidLoad()
- 
+        
         userNameField.delegate = self
         passwordField.delegate = self
         
@@ -39,7 +39,7 @@ final class LoginViewController: UIViewController, UITextFieldDelegate {
     
     override func viewWillLayoutSubviews() {
         
-        setupView()
+        changeColorView()
         setupActionKeyboard()
     }
     
@@ -135,9 +135,9 @@ final class LoginViewController: UIViewController, UITextFieldDelegate {
             return false
         }
         
-            alarmIfEmpty(textField: userNameField, reset: true)
-            alarmIfEmpty(textField: passwordField, reset: true)
-
+        alarmIfEmpty(textField: userNameField, reset: true)
+        alarmIfEmpty(textField: passwordField, reset: true)
+        
         guard userNameField.text == user, passwordField.text == password else {
             showAlert(
                 withTitle: "Invalid login or password!",
@@ -154,7 +154,7 @@ final class LoginViewController: UIViewController, UITextFieldDelegate {
         withTitle title: String,
         andMessage message: String,
         clearFields: Bool){
-          
+            
             let alert = UIAlertController(
                 title: title, message: message, preferredStyle: .alert
             )

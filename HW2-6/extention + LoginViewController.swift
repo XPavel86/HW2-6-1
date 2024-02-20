@@ -12,10 +12,10 @@ extension LoginViewController {
     
     //MARK: - Public Methods
     // меняем цвет фона в зависимости от темы
-    func setupView() {
+    func changeColorView() {
         view.backgroundColor = self.traitCollection.userInterfaceStyle == .light ?
-            UIColor(red: 0.957, green: 0.957, blue: 0.969, alpha: 1.0) :
-            UIColor.systemBackground
+        UIColor(red: 0.957, green: 0.957, blue: 0.969, alpha: 1.0) :
+        UIColor.systemBackground
     }
     
     func setupActionKeyboard() {
@@ -33,7 +33,7 @@ extension LoginViewController {
     // если появилась клавиатура и ландшафтная ориентация,
     // то сдвигаемся вверх на 80 поинтов
     // если портретная то возвращаемся
-     @objc func keyboardShow(_ notification: Notification) {
+    @objc func keyboardShow(_ notification: Notification) {
         
         self.mainStackCenterY.constant = UIDevice.current.orientation.isLandscape ? -80 : 0
         self.view.layoutIfNeeded() // принудительно обновляем макет
@@ -48,9 +48,8 @@ extension LoginViewController {
         }
     }
     
-    // MARK: - Private Methods
-     func setSettingsTextField(textField:  UITextField!, secureText: Bool = false) {
- 
+    func setSettingsTextField(textField:  UITextField!, secureText: Bool = false) {
+        
         textField.autocorrectionType = .no //автокоррекция отключена
         textField.smartQuotesType = .no //замена типа кавычек
         textField.smartDashesType = .no //замена тире
@@ -66,21 +65,15 @@ extension LoginViewController {
         //textContentType не равно .oneTimeCode и при не заданном keyboardType = .asciiCapable
         textField.inputAccessoryView = nil
         
-         setColorTextField(textField: textField)
+        setColorTextField(textField: textField)
     }
     
     // меняем цвет рамки в зависимости от темы
     func setColorTextField(textField:  UITextField!) {
-        if self.traitCollection.userInterfaceStyle == .light {
-            // нужно задать остальные параметры, чтобы цвет обновился
-            textField.layer.borderColor = UIColor.systemGray4.cgColor
-            textField.layer.borderWidth = 1.0
-            textField.layer.cornerRadius = 5.0
-        } else {
-            textField.layer.borderColor = UIColor.link.cgColor
-            textField.layer.borderWidth = 1.0
-            textField.layer.cornerRadius = 5.0
-        }
+        textField.layer.borderColor = self.traitCollection.userInterfaceStyle == .light ? UIColor.systemGray4.cgColor : UIColor.link.cgColor
+        
+        textField.layer.borderWidth = 1.0
+        textField.layer.cornerRadius = 5.0
     }
 }
 
