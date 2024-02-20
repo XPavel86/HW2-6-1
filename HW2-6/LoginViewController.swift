@@ -17,9 +17,6 @@ final class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet var loginButton: UIButton!
     
-    @IBOutlet var remindNameButton: UIButton!
-    @IBOutlet var remindPasswordButton: UIButton!
-    
     //MARK: - Private Properties
     private let user = "User"
     private let password = "123"
@@ -60,28 +57,28 @@ final class LoginViewController: UIViewController, UITextFieldDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let welcomeView = segue.destination as? WelcomeViewController
         
-        welcomeView?.greetingText = String(
-            "Welcome, \(userNameField.text ?? "")!"
-        )
+        welcomeView?.greetingText = userNameField.text
+        
         //print("Go >>>")
     }
     
     // MARK: - IBAction
+    
     // показываем подсказки логина / пароля
-    @IBAction func remindUserOrPassword(sender: UIButton) {
-        sender == remindNameButton ?
+    @IBAction func remindUser() {
         showAlert(
             withTitle: "Oops!",
             andMessage: "Your name is \(user) 😉",
-            clearFields: false
-        ) :
+            clearFields: false )
+    }
+    
+    @IBAction func reminPassword() {
         showAlert(
             withTitle: "Oops!",
             andMessage: "Your password is \(password) 😉",
             clearFields: false
         )
     }
-    
     // обрабатываем закрытие welcomeView
     //
     @IBAction func unwind(for segue: UIStoryboardSegue ) {
@@ -160,7 +157,7 @@ final class LoginViewController: UIViewController, UITextFieldDelegate {
             )
             let okAction = UIAlertAction(title: "OK", style: .default) {  _ in
                 if clearFields {
-                    self.userNameField.text = ""
+                    //self.userNameField.text = ""
                     self.passwordField.text = ""
                 }
             }

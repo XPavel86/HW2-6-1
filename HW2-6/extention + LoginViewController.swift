@@ -13,7 +13,7 @@ extension LoginViewController {
     //MARK: - Public Methods
     // меняем цвет фона в зависимости от темы
     func changeColorView() {
-        view.backgroundColor = self.traitCollection.userInterfaceStyle == .light ?
+        view.backgroundColor = traitCollection.userInterfaceStyle == .light ?
         UIColor(red: 0.957, green: 0.957, blue: 0.969, alpha: 1.0) :
         UIColor.systemBackground
     }
@@ -35,16 +35,16 @@ extension LoginViewController {
     // если портретная то возвращаемся
     @objc func keyboardShow(_ notification: Notification) {
         
-        self.mainStackCenterY.constant = UIDevice.current.orientation.isLandscape ? -80 : 0
-        self.view.layoutIfNeeded() // принудительно обновляем макет
+        mainStackCenterY.constant = UIDevice.current.orientation.isLandscape ? -80 : 0
+        view.layoutIfNeeded() // принудительно обновляем макет
     }
     
     // сбрасываем изменения констрейнта, если клавиатура скрылась
     @objc func keyboardHide(_ notification: Notification) {
         
-        if self.mainStackCenterY.constant != 0 {
-            self.mainStackCenterY.constant = 0
-            self.view.layoutIfNeeded()
+        if mainStackCenterY.constant != 0 {
+            mainStackCenterY.constant = 0
+            view.layoutIfNeeded()
         }
     }
     

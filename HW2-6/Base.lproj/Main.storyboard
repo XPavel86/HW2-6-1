@@ -12,7 +12,7 @@
         <!--LoginViewController-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" userLabel="LoginViewController" customClass="LoginViewController" customModule="HW2_6" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" userLabel="LoginViewController" customClass="LoginViewController" customModule="HW2_6_1" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -22,6 +22,7 @@
                                 <subviews>
                                     <textField opaque="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="User Name" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="fCx-TV-RMa" userLabel="UserNameTextField">
                                         <rect key="frame" x="0.0" y="0.0" width="297" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <textInputTraits key="textInputTraits" textContentType="username"/>
                                     </textField>
                                     <textField opaque="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ghi-9T-X7T" userLabel="PasswordTextField">
@@ -54,7 +55,7 @@
                                                     <color key="titleColor" systemColor="systemBlueColor"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="remindUserOrPasswordWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QY2-Re-8is"/>
+                                                    <action selector="remindUser" destination="BYZ-38-t0r" eventType="touchUpInside" id="hVz-hk-pT9"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dZQ-Ur-HtA" userLabel="ForgotUserPassword">
@@ -66,7 +67,7 @@
                                                     <color key="titleColor" systemColor="systemBlueColor"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="remindUserOrPasswordWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6Nl-aE-r5N"/>
+                                                    <action selector="reminPassword" destination="BYZ-38-t0r" eventType="touchUpInside" id="Y6f-5K-Hug"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -85,8 +86,6 @@
                         <outlet property="loginButton" destination="81l-DI-WJY" id="tY6-jU-puU"/>
                         <outlet property="mainStackCenterY" destination="T1h-pb-h1j" id="8hd-1b-f8I"/>
                         <outlet property="passwordField" destination="ghi-9T-X7T" id="Smu-yc-3pD"/>
-                        <outlet property="remindNameButton" destination="b2R-AR-iSi" id="1OL-Q9-Bct"/>
-                        <outlet property="remindPasswordButton" destination="dZQ-Ur-HtA" id="RyL-NU-n0c"/>
                         <outlet property="userNameField" destination="fCx-TV-RMa" id="Wwb-ZF-spC"/>
                     </connections>
                 </viewController>
@@ -97,7 +96,7 @@
         <!--Welcome View Controller-->
         <scene sceneID="vwz-fV-dgI">
             <objects>
-                <viewController id="XQw-7v-LHj" customClass="WelcomeViewController" customModule="HW2_6" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="XQw-7v-LHj" customClass="WelcomeViewController" customModule="HW2_6_1" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RIg-kR-eys">
                         <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -158,13 +157,13 @@
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="linkColor">
-            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBlueColor">
-            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

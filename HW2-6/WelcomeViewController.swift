@@ -25,7 +25,7 @@ final class WelcomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        greetingLabel.text? = greetingText
+        greetingLabel.text? += greetingText + "!"
         
         greetingLabel.textColor = .white
         logOutButton.tintColor = .white
