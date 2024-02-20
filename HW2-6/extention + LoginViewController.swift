@@ -12,10 +12,10 @@ extension LoginViewController {
     
     //MARK: - Public Methods
     // меняем цвет фона в зависимости от темы
-    func changeColorView() {
-        view.backgroundColor = traitCollection.userInterfaceStyle == .light ?
-        UIColor(red: 0.957, green: 0.957, blue: 0.969, alpha: 1.0) :
-        UIColor.systemBackground
+    func setViewColor() {
+        view.backgroundColor = self.traitCollection.userInterfaceStyle == .light ?
+            UIColor(red: 0.957, green: 0.957, blue: 0.969, alpha: 1.0) :
+            UIColor.systemBackground
     }
     
     func setupActionKeyboard() {
@@ -33,9 +33,10 @@ extension LoginViewController {
     // если появилась клавиатура и ландшафтная ориентация,
     // то сдвигаемся вверх на 80 поинтов
     // если портретная то возвращаемся
-    @objc func keyboardShow(_ notification: Notification) {
-        
-        mainStackCenterY.constant = UIDevice.current.orientation.isLandscape ? -80 : 0
+     @objc func keyboardShow(_ notification: Notification) {
+         
+        mainStackCenterY.constant = UIDevice.current.orientation.isLandscape ?
+         -80 : 0
         view.layoutIfNeeded() // принудительно обновляем макет
     }
     
@@ -47,34 +48,4 @@ extension LoginViewController {
             view.layoutIfNeeded()
         }
     }
-    
-    func setSettingsTextField(textField:  UITextField!, secureText: Bool = false) {
-        
-        textField.autocorrectionType = .no //автокоррекция отключена
-        textField.smartQuotesType = .no //замена типа кавычек
-        textField.smartDashesType = .no //замена тире
-        textField.smartInsertDeleteType = .no //авто уд./доб. пробелов
-        textField.keyboardType = .asciiCapable // отключаем смайлики
-        //тип контента - ввод одноразового кода
-        textField.textContentType = .oneTimeCode
-        //скрытые символы при вводе
-        textField.isSecureTextEntry = secureText
-        
-        //бар, который отображается над клавиатурой, nil - скрываем.
-        //Может не скрываться, если isSecureTextEntry = false и
-        //textContentType не равно .oneTimeCode и при не заданном keyboardType = .asciiCapable
-        textField.inputAccessoryView = nil
-        
-        setColorTextField(textField: textField)
-    }
-    
-    // меняем цвет рамки в зависимости от темы
-    func setColorTextField(textField:  UITextField!) {
-        textField.layer.borderColor = self.traitCollection.userInterfaceStyle == .light ? UIColor.systemGray4.cgColor : UIColor.link.cgColor
-        
-        textField.layer.borderWidth = 1.0
-        textField.layer.cornerRadius = 5.0
-    }
 }
-
-
