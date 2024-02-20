@@ -66,7 +66,6 @@ extension LoginViewController {
         //textContentType не равно .oneTimeCode и при не заданном keyboardType = .asciiCapable
         textField.inputAccessoryView = nil
         
-         setColorTextField(textField:  textField)
     }
     
     // меняем цвет рамки в зависимости от темы
