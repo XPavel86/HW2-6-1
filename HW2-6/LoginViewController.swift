@@ -17,6 +17,9 @@ final class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet var loginButton: UIButton!
     
+    @IBOutlet var remindNameButton: UIButton!
+    @IBOutlet var remindPasswordButton: UIButton!
+    
     //MARK: - Private Properties
     private let user = "User"
     private let password = "123"
@@ -25,19 +28,22 @@ final class LoginViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        userNameField.delegate = self
         passwordField.delegate = self
+        userNameField.delegate = self
         
-        setSettingsTextField(textField: userNameField)
-        setSettingsTextField(textField: passwordField, secureText: true)
+        passwordField.setSetting()
+        userNameField.setSetting()
+        
+        passwordField.isSecureTextEntry = true
         
         loginButton.layer.cornerRadius = 5 //скругляеем кнопку
     }
     
     override func viewWillLayoutSubviews() {
         
-        changeColorView()
+        setViewColor()
         setupActionKeyboard()
+        
     }
     
     // MARK: - Overrides Methods
@@ -50,7 +56,7 @@ final class LoginViewController: UIViewController, UITextFieldDelegate {
     // скрываем клавиатуру при тапе на экране
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
-        view.endEditing(true)
+        self.view.endEditing(true)
     }
     
     // передаем текст в welcomeView
@@ -58,33 +64,29 @@ final class LoginViewController: UIViewController, UITextFieldDelegate {
         let welcomeView = segue.destination as? WelcomeViewController
         
         welcomeView?.greetingText = userNameField.text
-        
-        //print("Go >>>")
     }
     
     // MARK: - IBAction
-    
     // показываем подсказки логина / пароля
-    @IBAction func remindUser() {
+    @IBAction func remindUserOrPassword(sender: UIButton) {
+        sender == remindNameButton ?
         showAlert(
             withTitle: "Oops!",
             andMessage: "Your name is \(user) 😉",
-            clearFields: false )
-    }
-    
-    @IBAction func reminPassword() {
+            clearFields: false
+        ) :
         showAlert(
             withTitle: "Oops!",
             andMessage: "Your password is \(password) 😉",
             clearFields: false
         )
     }
+    
     // обрабатываем закрытие welcomeView
     //
     @IBAction func unwind(for segue: UIStoryboardSegue ) {
         userNameField.text = ""
         passwordField.text = ""
-        //print("Back <<<")
     }
     
     // MARK: - Public Methods
@@ -100,41 +102,17 @@ final class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     // MARK: - Private Methods
-    // подсвечиваем TextField
-    private func alarmIfEmpty(textField: UITextField, reset: Bool = false)
-    {
-        if !reset {
-            textField.layer.borderColor = UIColor.blue.cgColor
-            textField.layer.borderWidth = 1.0
-            textField.layer.cornerRadius = 5.0
-            textField.becomeFirstResponder() // устанавливаем фокус
-        } else
-        {
-            setColorTextField(textField:  textField)
-        }
-    }
+
     // проверяем логин / пароль
     private func checkСredentials() -> Bool {
-        
-        let feedbackGenerator = UINotificationFeedbackGenerator()
-        
-        guard userNameField.text != "" else {
-            alarmIfEmpty(textField: userNameField)
-            feedbackGenerator.notificationOccurred(.error)
-            
+        guard userNameField.text != "" else { userNameField.alarm()
             return false
         }
         
-        guard passwordField.text != "" else {
-            alarmIfEmpty(textField: passwordField)
-            feedbackGenerator.notificationOccurred(.error)
-            
+        guard passwordField.text != "" else { passwordField.alarm()
             return false
         }
-        
-        alarmIfEmpty(textField: userNameField, reset: true)
-        alarmIfEmpty(textField: passwordField, reset: true)
-        
+
         guard userNameField.text == user, passwordField.text == password else {
             showAlert(
                 withTitle: "Invalid login or password!",
@@ -151,19 +129,68 @@ final class LoginViewController: UIViewController, UITextFieldDelegate {
         withTitle title: String,
         andMessage message: String,
         clearFields: Bool){
-            
+          
             let alert = UIAlertController(
                 title: title, message: message, preferredStyle: .alert
             )
             let okAction = UIAlertAction(title: "OK", style: .default) {  _ in
                 if clearFields {
-                    //self.userNameField.text = ""
+                   // self.userNameField.text = ""
                     self.passwordField.text = ""
                 }
             }
-            alert.view.alpha = 0.5 // не сработало (
             alert.addAction(okAction)
             present(alert, animated: true)
         }
 }
 
+extension UITextField {
+    
+    func setBorderColor() {
+        layer.borderColor = self.traitCollection.userInterfaceStyle == .light ? UIColor.systemGray4.cgColor : UIColor.link.cgColor
+        
+        layer.borderWidth = 1.0
+        layer.cornerRadius = 5.0
+    }
+    
+    func setSetting() {
+        
+        //delegate = self // без этого кнопка enter не будет работать
+        autocorrectionType = .no //автокоррекция отключена
+        smartQuotesType = .no //замена типа кавычек
+        smartDashesType = .no //замена тире
+        smartInsertDeleteType = .no //авто уд./доб. пробелов
+        keyboardType = .asciiCapable // отключаем смайлики
+        //тип контента - ввод одноразового кода
+        textContentType = .oneTimeCode
+        //скрытые символы при вводе
+        //isSecureTextEntry = secureText
+        
+        //бар, который отображается над клавиатурой, nil - скрываем.
+        //Может не скрываться, если isSecureTextEntry = false и
+        //textContentType не равно .oneTimeCode и при не заданном keyboardType = .asciiCapable
+        inputAccessoryView = nil
+        
+        setBorderColor()
+    }
+    
+    func alarm() {
+        
+        let feedbackGenerator = UINotificationFeedbackGenerator()
+        feedbackGenerator.notificationOccurred(.error) // вибр
+        
+        self.becomeFirstResponder() // фокус
+        // цвет рамки с анимацией
+        UIView.animate(withDuration: 0.5) {
+            self.layer.borderColor = UIColor.red.cgColor
+            self.layer.borderWidth = 1.0
+            self.layer.cornerRadius = 5.0
+        }
+        // возврат к исходному цвету
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            UIView.animate(withDuration: 0.5) {
+                self.setBorderColor()
+            }
+        }
+    }
+}
