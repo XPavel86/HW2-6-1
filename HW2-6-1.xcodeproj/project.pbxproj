@@ -44,7 +44,7 @@
 		EFCC352C2B8140E200FCE9C1 = {
 			isa = PBXGroup;
 			children = (
-				EFCC35372B8140E200FCE9C1 /* HW2-6-1 */,
+				EFCC35372B8140E200FCE9C1 /* HW2-6 */,
 				EFCC35362B8140E200FCE9C1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -57,7 +57,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		EFCC35372B8140E200FCE9C1 /* HW2-6-1 */ = {
+		EFCC35372B8140E200FCE9C1 /* HW2-6 */ = {
 			isa = PBXGroup;
 			children = (
 				EFCC35382B8140E200FCE9C1 /* AppDelegate.swift */,
@@ -70,7 +70,7 @@
 				EFCC35432B8140E300FCE9C1 /* LaunchScreen.storyboard */,
 				EFCC35462B8140E300FCE9C1 /* Info.plist */,
 			);
-			path = "HW2-6-1";
+			path = "HW2-6";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
